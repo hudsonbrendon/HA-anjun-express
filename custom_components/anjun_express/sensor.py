@@ -12,6 +12,7 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.const import EntityCategory
 
+from .const import CONF_PACKAGE_NAME, CONF_TRACKING_NUMBER, create_entity_id
 from .entity import AnjunExpressEntity
 
 if TYPE_CHECKING:
@@ -73,9 +74,21 @@ class AnjunExpressSensor(AnjunExpressEntity, SensorEntity):
         """Initialize the sensor class."""
         super().__init__(coordinator)
         self.entity_description = entity_description
-        self._attr_unique_id = (
-            f"{coordinator.config_entry.entry_id}_{entity_description.key}"
+
+        # Get package info for naming
+        tracking_number = coordinator.config_entry.data[CONF_TRACKING_NUMBER]
+
+        # Create standardized entity ID
+        self._attr_unique_id = create_entity_id(
+            tracking_number=tracking_number,
+            sensor_type=entity_description.key,
         )
+
+        # Set entity name following the pattern
+        entity_name = (
+            f"Anjun {tracking_number} {entity_description.name}"
+        )
+        self._attr_name = entity_name
 
     @property
     def native_value(self) -> str | datetime | None:

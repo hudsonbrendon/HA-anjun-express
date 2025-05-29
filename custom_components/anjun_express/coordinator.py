@@ -74,7 +74,10 @@ class AnjunExpressDataUpdateCoordinator(DataUpdateCoordinator):
         date: str,
     ) -> None:
         """Create a persistent notification for package updates."""
-        notification_id = f"anjun_express_{tracking_number}"
+        # Create notification ID following similar pattern
+        clean_package_name = package_name.lower().replace(" ", "_")
+        clean_tracking = tracking_number.lower()
+        notification_id = f"anjun_{clean_package_name}_{clean_tracking}_update"
 
         title = f"📦 Package Update: {package_name}"
 
