@@ -1,0 +1,21 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "description": "Configure your Anjun Express package tracking integration.",
+                "data": {
+                    "tracking_number": "Tracking Number",
+                    "package_name": "Package Name"
+                }
+            }
+        },
+        "error": {
+            "tracking_not_found": "Tracking number not found.",
+            "connection": "Unable to connect to Anjun Express servers.",
+            "unknown": "Unknown error occurred."
+        },
+        "abort": {
+            "already_configured": "This tracking number is already configured."
+        }
+    }
+}

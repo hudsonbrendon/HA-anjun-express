@@ -1,5 +1,7 @@
 {
-    "name": "Integration blueprint",
+    "name": "Anjun Express",
     "homeassistant": "2025.2.4",
-    "hacs": "2.0.1"
+    "hacs": "2.0.1",
+    "content_in_root": false,
+    "filename": "anjun_express"
 }

@@ -1,46 +1,88 @@
-# Notice
+# Anjun Express Integration for Home Assistant
 
-The component and platforms in this repository are not meant to be used by a
-user, but as a "blueprint" that custom component developers can build
-upon, to make more awesome stuff.
+A custom Home Assistant integration to track packages from Anjun Express shipping company.
 
-HAVE FUN! 😎
+## Features
 
-## Why?
+- **Real-time Package Tracking**: Monitor your Anjun Express packages directly from Home Assistant
+- **Multiple Sensors**: Get detailed information about your packages:
+  - Current delivery status
+  - Current location
+  - Last update timestamp
+  - Number of tracking events
+  - Delivery confirmation (binary sensor)
+- **Multilingual Support**: Available in English and Portuguese (Brazil)
+- **Easy Setup**: Simple configuration through the Home Assistant UI
 
-This is simple, by having custom_components look (README + structure) the same
-it is easier for developers to help each other and for users to start using them.
+## Installation
 
-If you are a developer and you want to add things to this "blueprint" that you think more
-developers will have use for, please open a PR to add it :)
+### Manual Installation
 
-## What?
+1. Copy the `custom_components/anjun_express` folder to your Home Assistant `custom_components` directory
+2. Restart Home Assistant
+3. Go to Configuration > Integrations
+4. Click the "+" button and search for "Anjun Express"
+5. Enter your tracking number and a name for your package
 
-This repository contains multiple files, here is a overview:
+## Configuration
 
-File | Purpose | Documentation
--- | -- | --
-`.devcontainer.json` | Used for development/testing with Visual Studio Code. | [Documentation](https://code.visualstudio.com/docs/remote/containers)
-`.github/ISSUE_TEMPLATE/*.yml` | Templates for the issue tracker | [Documentation](https://help.github.com/en/github/building-a-strong-community/configuring-issue-templates-for-your-repository)
-`custom_components/integration_blueprint/*` | Integration files, this is where everything happens. | [Documentation](https://developers.home-assistant.io/docs/creating_component_index)
-`CONTRIBUTING.md` | Guidelines on how to contribute. | [Documentation](https://help.github.com/en/github/building-a-strong-community/setting-guidelines-for-repository-contributors)
-`LICENSE` | The license file for the project. | [Documentation](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository)
-`README.md` | The file you are reading now, should contain info about the integration, installation and configuration instructions. | [Documentation](https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax)
-`requirements.txt` | Python packages used for development/lint/testing this integration. | [Documentation](https://pip.pypa.io/en/stable/user_guide/#requirements-files)
+The integration requires:
+- **Tracking Number**: Your Anjun Express tracking code (e.g., AJ250507242061301)
+- **Package Name**: A friendly name for your package (e.g., "My Order")
 
-## How?
+## Sensors
 
-1. Create a new repository in GitHub, using this repository as a template by clicking the "Use this template" button in the GitHub UI.
-1. Open your new repository in Visual Studio Code devcontainer (Preferably with the "`Dev Containers: Clone Repository in Named Container Volume...`" option).
-1. Rename all instances of the `integration_blueprint` to `custom_components/<your_integration_domain>` (e.g. `custom_components/awesome_integration`).
-1. Rename all instances of the `Integration Blueprint` to `<Your Integration Name>` (e.g. `Awesome Integration`).
-1. Run the `scripts/develop` to start HA and test out your new integration.
+### Current Status
+Shows the current delivery status of your package.
 
-## Next steps
+### Current Location
+Shows the current location/address of your package.
 
-These are some next steps you may want to look into:
-- Add tests to your integration, [`pytest-homeassistant-custom-component`](https://github.com/MatthewFlamm/pytest-homeassistant-custom-component) can help you get started.
-- Add brand images (logo/icon) to https://github.com/home-assistant/brands.
-- Create your first release.
-- Share your integration on the [Home Assistant Forum](https://community.home-assistant.io/).
-- Submit your integration to [HACS](https://hacs.xyz/docs/publish/start).
+### Last Update
+Shows when the package information was last updated.
+
+### Tracking Events
+Shows the total number of tracking events and includes detailed event history in attributes.
+
+### Delivered (Binary Sensor)
+Indicates whether the package has been delivered.
+
+## API Information
+
+This integration uses the Anjun Express tracking API:
+- **Endpoint**: `https://website-trackings.anjunexpress.com.br/tracking/get-tracking`
+- **Update Interval**: 30 minutes (configurable)
+
+## Supported Status Messages
+
+The integration recognizes various delivery status messages in both Portuguese and English, including:
+- Package movements between distribution centers
+- Arrival at delivery points
+- Out for delivery
+- Delivery confirmation
+
+## Example Package Tracking
+
+When you add a package, you'll get entities like:
+- `sensor.my_package_current_status` - Shows "Objeto saiu para entrega ao destinatário"
+- `sensor.my_package_current_location` - Shows "Parnamirim / RN"
+- `sensor.my_package_last_update` - Shows the timestamp of last update
+- `sensor.my_package_tracking_events` - Shows number of events with full history in attributes
+- `binary_sensor.my_package_delivered` - Shows if package is delivered
+
+## Development
+
+To set up the development environment:
+
+1. Open this repository in Visual Studio Code with the Dev Container extension
+2. The container will automatically set up the development environment
+3. Run `scripts/develop` to start Home Assistant with the integration loaded
+4. Go to `localhost:8123` to access the Home Assistant instance
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.

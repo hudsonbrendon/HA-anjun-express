@@ -1,0 +1,23 @@
+{
+    "entity": {
+        "sensor": {
+            "current_status": {
+                "name": "Current Status"
+            },
+            "current_location": {
+                "name": "Current Location"
+            },
+            "last_update": {
+                "name": "Last Update"
+            },
+            "tracking_events": {
+                "name": "Tracking Events"
+            }
+        },
+        "binary_sensor": {
+            "delivered": {
+                "name": "Delivered"
+            }
+        }
+    }
+}

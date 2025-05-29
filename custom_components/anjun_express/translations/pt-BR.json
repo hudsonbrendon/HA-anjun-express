@@ -1,0 +1,21 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "description": "Configure sua integração de rastreamento de pacotes da Anjun Express.",
+                "data": {
+                    "tracking_number": "Código de Rastreamento",
+                    "package_name": "Nome do Pacote"
+                }
+            }
+        },
+        "error": {
+            "tracking_not_found": "Código de rastreamento não encontrado.",
+            "connection": "Não foi possível conectar aos servidores da Anjun Express.",
+            "unknown": "Erro desconhecido ocorreu."
+        },
+        "abort": {
+            "already_configured": "Este código de rastreamento já está configurado."
+        }
+    }
+}
